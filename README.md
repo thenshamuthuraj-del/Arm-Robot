@@ -1,51 +1,55 @@
-#define BLYNK_TEMPLATE_ID "********"
-#define BLYNK_DEVICE_NAME "********"
-#define BLYNK_AUTH_TOKEN "********"
-#define BLYNK_PRINT Serial
+# 🤖 IoT Robotic Arm Controlled via Blynk (ESP8266)
 
-#include <ESP8266WiFi.h>
-#include <BlynkSimpleEsp8266.h>
-#include<Servo.h>
+An ESP8266-based robotic arm with **five servo motors**, remotely controlled using the **Blynk IoT platform**.  
+This project demonstrates real-time IoT control of multiple actuators—ideal for learning, demos, or prototyping automation systems.
 
-Servo servo1, servo2, servo3, servo4, servo5;
+---
 
-char auth[] = BLYNK_AUTH_TOKEN;
-char ssid[] = "********";
-char pass[] = "********";
+## 📦 **Features**
+✅ Control five servo motors via smartphone  
+✅ Simple Blynk dashboard integration  
+✅ Wi-Fi enabled using NodeMCU (ESP8266)  
+✅ Clean, minimal code for easy customization
 
-BLYNK_WRITE(V0){     
-    int value = param.asInt(); // Get value as integer  
-    servo1.write(value);
-}
-BLYNK_WRITE(V1){     
-    int value = param.asInt(); // Get value as integer  
-    servo2.write(value);
-}
-BLYNK_WRITE(V2){     
-    int value = param.asInt(); // Get value as integer  
-    servo3.write(value);
-}
-BLYNK_WRITE(V3){     
-    int value = param.asInt(); // Get value as integer  
-    servo4.write(value);
-}
-BLYNK_WRITE(V4){     
-    int value = param.asInt(); // Get value as integer  
-    servo5.write(value);
-}
+---
 
-void setup(){
-    Serial.begin(9600);
-    servo1.attach(D2);
-    servo2.attach(D3);
-    servo3.attach(D5);
-    servo4.attach(D6);
-    servo5.attach(D7);
-    Blynk.begin(auth, ssid, pass);
-    //Splash screen delay  
-    delay(2000); 
-}
+## 🛠 **Hardware Used**
+- NodeMCU ESP8266
+- 5× Servo motors (e.g., SG90)
+- USB power supply / external 5V power for servos
+- Jumper wires
 
-void loop() {  
-    Blynk.run();
-}
+---
+
+## ⚙️ **Pin Configuration**
+
+| Servo | ESP8266 Pin |
+|------:|:-----------:|
+|  1    | D2          |
+|  2    | D3          |
+|  3    | D5          |
+|  4    | D6          |
+|  5    | D7          |
+
+*(You can adjust these pins in the code if needed.)*
+
+---
+
+## 📲 **Blynk Setup**
+- Use the new **Blynk IoT** app (not the legacy one)
+- Create 5 sliders:
+  - `V0` → controls Servo 1  
+  - `V1` → controls Servo 2  
+  - `V2` → controls Servo 3  
+  - `V3` → controls Servo 4  
+  - `V4` → controls Servo 5
+- Each slider:  
+  - Range: `0–180` (servo angle)
+  - Send on release: enabled
+
+---
+
+## 🧰 **Libraries Used**
+- `ESP8266WiFi.h`
+- `BlynkSimpleEsp8266.h`
+- `Servo.h`
